@@ -30,7 +30,7 @@
 // Expected output:
 //make an object that allows us to have a running sum
 
-
+//Business Logic
 
 function CreatePlayer(playerNumber) {
     this.playerName = playerNumber;
@@ -63,6 +63,75 @@ let player1 = new CreatePlayer(1);
 let player2 = new CreatePlayer(2);
 
 
-console.log(player1)
+CreatePlayer.prototype.winCheck = function() {
+    if (this.currentSum >= 30) {
+        return this.playerName;
+    }
+}
+
+//UI Logic
+
+window.addEventListener("load", function (){
+
+        let turnCounter = 1;
+     
+        rollButtonPlayer1 = document.getElementById("button1");
+        rollButtonPlayer1.addEventListener("click", function() {
+
+            if (turnCounter % 2 === 1) {
+
+                player1.updateSum();
+
+                let lastRollPlayer1 = document.getElementById("lastrollplayer1");
+                lastRollPlayer1.innerText = player1.lastRoll;
+
+                let currentSumPlayer1 = document.getElementById("currentsumplayer1");
+                currentSumPlayer1.innerText = player1.currentSum;
+
+                let to30Player1 = document.getElementById("to30player1");
+                to30Player1.innerText = player1.to30;
+
+                turnCounter++;
+                let winCheckP1 = player1.winCheck();
+
+                if (winCheckP1 === 1) {
+                    document.getElementById("button1").disabled = true;
+                    document.getElementById("button2").disabled = true;
+                    document.getElementById("winCheckPlayer1").innerText = "You've won!";
+                    document.getElementById("winCheckPlayer2").innerText = "You've lost!";
+
+                }
+            
+            }
+        });
+
+        rollButtonPlayer2 = document.getElementById("button2");
+        rollButtonPlayer2.addEventListener("click", function() {
+
+            if (turnCounter % 2 === 0) {
+                player2.updateSum();
+
+                let lastRollPlayer2 = document.getElementById("lastrollplayer2");
+                lastRollPlayer2.innerText = player2.lastRoll;
+
+                let currentSumPlayer2 = document.getElementById("currentsumplayer2");
+                currentSumPlayer2.innerText = player2.currentSum;
+
+                let to30Player2 = document.getElementById("to30player2");
+                to30Player2.innerText = player2.to30;
+            
+                turnCounter++;
+                let winCheckP2 = player2.winCheck();
+
+                if (winCheckP2 === 2) {
+                    document.getElementById("button1").disabled = true;
+                    document.getElementById("button2").disabled = true;
+                    document.getElementById("winCheckPlayer2").innerText = "You've won!";
+                    document.getElementById("winCheckPlayer1").innerText = "You've lost!";
+                }
+            }
+        });
+
+});
 
 
