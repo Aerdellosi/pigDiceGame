@@ -35,7 +35,7 @@
 function CreatePlayer(playerNumber) {
     this.playerName = playerNumber;
     this.lastRoll = 0;
-    this.currentSum = 0;
+    this.currentSum = 29;
     this.to30 = 30 - this.lastRoll;
 }
 
@@ -99,6 +99,7 @@ window.addEventListener("load", function (){
                     document.getElementById("button2").disabled = true;
                     document.getElementById("winCheckPlayer1").innerText = "You've won!";
                     document.getElementById("winCheckPlayer2").innerText = "You've lost!";
+                    document.getElementById("button3").removeAttribute("class");
 
                 }
             
@@ -128,8 +129,27 @@ window.addEventListener("load", function (){
                     document.getElementById("button2").disabled = true;
                     document.getElementById("winCheckPlayer2").innerText = "You've won!";
                     document.getElementById("winCheckPlayer1").innerText = "You've lost!";
+                    document.getElementById("button3").removeAttribute("class");
                 }
             }
+        });
+
+        newGameButton = document.getElementById("button3");
+        console.log(newGameButton);
+        newGameButton.addEventListener("click", function(){
+            console.log("test");
+            let to30Player1 = document.getElementById("winCheckPlayer1");
+            let to30Player2 = document.getElementById("winCheckPlayer2");
+            let to30InsidePlayer1 = document.getElementById("to30Player1");
+            to30Player1.innerText = " to 30!";
+            to30InsidePlayer1.innerText = "______";
+            
+            player1.currentSum = 0;
+            player2.currentSum = 0;
+
+            document.getElementById("button1").disabled = false;
+            document.getElementById("button2").disabled = false;
+
         });
 
 });
